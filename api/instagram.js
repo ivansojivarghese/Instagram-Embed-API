@@ -1,4 +1,6 @@
 const GRAPH_API_VERSION = process.env.IG_GRAPH_API_VERSION || "v27.0";
+const APP_ID = process.env.IG_APP_ID;
+const APP_SECRET = process.env.IG_APP_SECRET;
 const MEDIA_FIELDS = [
     "id",
     "caption",
@@ -18,7 +20,7 @@ export default async function handler(request, response) {
     const accountId = process.env.IG_ACCOUNT_ID;
     const accessToken = process.env.IG_ACCESS_TOKEN;
 
-    if (!accountId || !accessToken) {
+    if (!APP_ID || !APP_SECRET || !accountId || !accessToken) {
         return response.status(500).json({
             error: "Instagram integration is not configured"
         });
