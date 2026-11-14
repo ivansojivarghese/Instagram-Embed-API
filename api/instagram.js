@@ -17,6 +17,8 @@ export default async function handler(request, response) {
         return response.status(405).json({ error: "Method not allowed" });
     }
 
+    //
+
     const accountId = process.env.IG_ACCOUNT_ID;
     const accessToken = process.env.IG_ACCESS_TOKEN;
 
