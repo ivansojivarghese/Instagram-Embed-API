@@ -12,12 +12,24 @@ const MEDIA_FIELDS = [
 ].join(",");
 
 export default async function handler(request, response) {
+    response.setHeader(
+        "Access-Control-Allow-Origin",
+        "https://ivansojivarghese.github.io"
+    );
+    response.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+    response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    response.setHeader("Vary", "Origin");
+
+    if (request.method === "OPTIONS") {
+        return response.status(200).end();
+    }
+
+    //
+
     if (request.method !== "GET") {
         response.setHeader("Allow", "GET");
         return response.status(405).json({ error: "Method not allowed" });
     }
-
-    //
 
     const accountId = process.env.IG_ACCOUNT_ID;
     const accessToken = process.env.IG_ACCESS_TOKEN;
